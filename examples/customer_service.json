@@ -1,0 +1,34 @@
+{
+  "state": {"message": "我的信用卡被扣了两次，请退款。我已经联系三次客服了，请今天解决。"},
+  "questions": {
+    "department": {
+      "type": "choice",
+      "instructions": "Which team should handle this customer's primary request?",
+      "criteria": {
+        "billing": "Charges, duplicate payments, refunds, invoices",
+        "technical": "Software bugs, crashes, login failures",
+        "sales": "Pricing, plans, product purchase inquiries",
+        "other": "None of the above or insufficient information"
+      }
+    },
+    "refund_requested": {
+      "type": "boolean",
+      "instructions": "Is the customer explicitly asking for money to be refunded?",
+      "criteria": {
+        "true": "Explicitly requests a refund, money back, or reversal of a charge",
+        "false": "Does not explicitly request a refund"
+      }
+    },
+    "urgency": {
+      "type": "score",
+      "instructions": "Rate the urgency using only the stated time requirement and impact.",
+      "min_value": 1,
+      "criteria": [
+        "Routine inquiry; no urgency or deadline mentioned",
+        "Requests action soon, within several days; not today",
+        "Explicitly asks for resolution today; no active critical outage or immediate danger"
+      ]
+    }
+  },
+  "review_threshold": 0.5
+}

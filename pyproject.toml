@@ -1,0 +1,52 @@
+[build-system]
+requires = ["hatchling>=1.27"]
+build-backend = "hatchling.build"
+
+[project]
+name = "wald-agent"
+version = "1.0.0"
+description = "Typed decisions over LLM APIs, with a Jev comparison harness"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+  "fastapi>=0.115,<1",
+  "httpx>=0.27,<1",
+  "jsonschema>=4.23,<5",
+  "pydantic>=2.10,<3",
+  "pydantic-settings>=2.7,<3",
+  "uvicorn>=0.34,<1",
+  "prometheus-client>=0.21,<1",
+  "filelock>=3.16,<4",
+  "pillow>=11,<14",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8.3,<10", "pytest-asyncio>=0.25,<2", "pytest-cov>=6,<8", "ruff>=0.9,<1"]
+
+[project.scripts]
+wald = "wald_agent.admin:main"
+wald-decide = "wald_agent.cli:decide_main"
+wald-compare = "wald_agent.benchmark:main"
+jev-image = "wald_agent.vision:main"
+
+[tool.hatch.build]
+exclude = ["/config/.env", "/config/.env.*", "!/config/.env.example"]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/wald_agent"]
+
+[tool.hatch.build.targets.wheel.force-include]
+"examples" = "wald_agent/assets"
+"config/.env.example" = "wald_agent/assets/env.example"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "auto"
+markers = ["process: local TCP and subprocess integration tests (no external APIs)"]
+
+[tool.ruff]
+target-version = "py311"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "ASYNC"]

@@ -216,3 +216,14 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Local benchmark reports may contain business inputs.
+reports/
+# Keep real dotenv credentials private; publish only .env.example templates.
+.env.*
+!.env.example
+data/
+*.sqlite3
+*.sqlite3-wal
+*.sqlite3-shm
+*.service.lock

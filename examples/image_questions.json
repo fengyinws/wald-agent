@@ -1,0 +1,16 @@
+{
+  "main_subject": {
+    "type": "choice",
+    "instructions": "What is the main visible subject of the image?",
+    "criteria": {
+      "cat": "A cat is the main subject.",
+      "dog": "A dog is the main subject.",
+      "other": "A clearly visible subject other than a cat or dog.",
+      "unclear": "The subject cannot be determined from the visual evidence."
+    }
+  },
+  "contains_cat": {
+    "type": "boolean",
+    "instructions": "Does the image visibly contain at least one cat?"
+  }
+}
